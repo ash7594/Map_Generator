@@ -32,7 +32,7 @@ function generation(index) {
 
         	for(ii=yi-2; ii<=yi+2; ii++) {
         		for(jj=xi-2; jj<=xi+2; jj++) {
-            		if(abs(ii-yi)==2 && abs(jj-xi)==2)
+            		if(Math.abs(ii-yi)==2 && Math.abs(jj-xi)==2)
                 		continue;
             		if(ii<0 || jj<0 || ii>=size_y || jj>=size_x)
                 		continue;
@@ -58,7 +58,7 @@ function generation(index) {
 function map_gen () {
 	var argc = 10;
 
-	params = new Array(gererations);
+	params = new Array(generations);
 	params[0] = new generation_params(5,2,4);
 	params[1] = new generation_params(5,-1,3);
 
@@ -81,7 +81,7 @@ function mapAssign() {
 }
 
 function makeArray(element, index, array) {
-	array[index] = new Array[size_x];
+	array[index] = new Array(size_x);
 }
 
 function randpick() {
@@ -91,12 +91,18 @@ function randpick() {
 		return TILE_FLOOR;
 }
 
-function initmap () {
+function initMap () {
 	grid = new Array(size_y);
-	grid.forEach(makeArray);
+	//grid.forEach(makeArray);
+	for (var i=0;i<size_y;i++) {
+		grid[i] = new Array(size_x);
+	}
 
 	grid2 = new Array(size_y);
-	grid.forEach(makeArray);
+	//grid2.forEach(makeArray);
+	for (var i=0;i<size_y;i++) {
+		grid2[i] = new Array(size_x);
+	}
 
 	for (var i=1;i<size_y-1;i++) {
 		for (var j=1;j<size_x-1;j++) {
@@ -149,6 +155,7 @@ function initElements() {
     ctx.textBaseline = 'middle';
     //setImmediate(render);
 	//render();
+	map_gen();	
 	drawBG();
 }
 /*
